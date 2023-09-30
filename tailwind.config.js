@@ -23,10 +23,15 @@ export default {
         lineHeight:'20px',
         fontWeight:'400'
       }],
-      'tit-h1':['65px',{
+      'moyeen':['24px',{
         lineHeight:'71.5px',
         fontWeight:'400'
       }],
+       'bold':['30px',{
+        lineHeight:'73.5px',
+        fontWeight:'600'
+      }],
+     
      
     },
    

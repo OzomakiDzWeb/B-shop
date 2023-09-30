@@ -10,7 +10,7 @@ import Cart from "./pages/Cart"
 
 const App = () => {
   return (
-  <div className="font-Poppins ">
+  <div className="font-Poppins px-10 ">
     <BrowserRouter>
       <Header/>
        <div className="section ">

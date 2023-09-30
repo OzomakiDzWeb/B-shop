@@ -2,16 +2,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html{
-fontFamily:"Poppins"}
+html {
+  fontfamily: "Poppins";
+}
 @layer base {
   img {
     @apply w-full;
   }
   .section {
-    @apply container mx-auto py-24 px-6 min-h-screen;
+    @apply container mx-auto py-24  min-h-screen;
   }
-  .animate-slide:hover {
-    animation-play-state: paused;
+  .animate-link:hover {
+    @apply relative text-green2 scale-105 w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-red1 after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition-all after:duration-300  after:origin-left;
   }
 }
