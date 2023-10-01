@@ -24,21 +24,22 @@ const contanerLg={
     transition:{duration:0.5}
   },
 }
-const Rigister = () => {
+const Reset = () => {
   return (
-    <div className=' flex justify-center items-center h-[calc(100vh-80px)]  '>
+     <div className=' flex justify-center items-center h-[calc(100vh-80px)]  '>
      
       <motion.form
         variants={contanerImg}
         initial='hidden'
         animate='visible'
          className='border border-gray-lghit  rounded-md flex items-center flex-col justify-between p-4 shadow-lg  ' >
-        <h1 className='text-red3 text-bold'>Register</h1>
+        <h1 className='text-red3 text-bold'>Reset Password</h1>
         <input className='inpt' type='email' placeholder='Email' required/>
-        <input className='inpt mt-2' type='password' placeholder='Password' required/>
-        <input className='inpt mt-2' type='password' placeholder='confrm password' required/>
-        <button className='btn bg-red3 mt-2'><Link >Rigister</Link></button>
-        <div className='mt-2'>Arealy an Account?<Link  className='hover:text-green2 transition-all duration-150 font-semibold'  to='/logIn'>LogIn</Link></div>
+        <button className='btn bg-red3 mt-2'><Link >Reset Password</Link></button>
+        <div className='flex justify-between w-full mt-2'>
+          <Link to='/logIn' className='hover:text-red3 transition-all'>Login</Link>
+          <Link to='/rigister' className='hover:text-red3 transition-all'>Register</Link>
+        </div>
       </motion.form>
        <motion.div
         variants={contanerLg}
@@ -51,4 +52,4 @@ const Rigister = () => {
   )
 }
 
-export default Rigister
+export default Reset
