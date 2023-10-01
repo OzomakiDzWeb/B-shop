@@ -1,15 +1,25 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 import {AiOutlineMenu, AiOutlineShopping} from "react-icons/ai"
 import { useEffect, useState } from "react"
 import MobilNav from "./MobilNav"
 import {motion} from 'framer-motion'
-
+import { auth } from "../fairbase/config"
+import { signOut } from "firebase/auth";
+import { toast } from "react-toastify"
 
 const Header = () => {
 
   const [show,setshow]=useState(false)
   const [active,setactive]=useState(null)
-
+  const navigat=useNavigate()
+  const LogOut=()=>{
+    signOut(auth).then(() => {
+     toast.success('logOut successfully')
+     navigat('/')
+}).catch((error) => {
+  toast.error(error.message)
+});
+  }
   useEffect(()=>{
     const scrollActive =()=>{
       setactive(window.scrollY>20)
@@ -21,7 +31,7 @@ const Header = () => {
   const activLik=({isActive})=>(isActive?" animate-link font-bold":'font-bold')
 
   return (
-    <div className={`${active?'py-0 shadow-lg transition-all duration-300 rounded-lg':''} mx-auto py-2 bg-gray-extrai fixed bg-black top-0 left-0 text-white w-full  flex justify-between items-center  px-5`}>
+    <div className={`${active?'py-0 shadow-lg transition-all duration-300 rounded-lg':''} mx-auto py-2 bg-gray-extrai fixed bg-black top-0 left-0 text-white w-full  flex justify-between items-center z-50  px-5`}>
       <Link to='/'><div className="text-red1 text-moyeen sm:text-bold">B-<span className="text-green1">SHOP</span></div></Link>
       <div className="sm:flex gap-4 hidden">
         {/* <Link to=''>ADMIN</Link> */}
@@ -32,6 +42,7 @@ const Header = () => {
         <NavLink className={activLik} to='/logIn'>Login</NavLink>
         <NavLink className={activLik} to='/rigister'>Register</NavLink>
         <NavLink className={activLik} to='/order'>My Orders</NavLink>
+        <NavLink onClick={LogOut} className={activLik} to='/'>LogOut</NavLink>
         </div>
         <div>
         <MobilNav show={show} setshow={setshow}/>

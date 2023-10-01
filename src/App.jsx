@@ -8,6 +8,7 @@ import OrderHistory from './pages/OrderHistory'
 import LogIn from "./pages/LogIn"
 import Cart from "./pages/Cart"
 import Reset from "./pages/Reset"
+import { ToastContainer } from "react-toastify"
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
      
       <Footer/>
      </BrowserRouter>
+     <ToastContainer  autoClose={3000} closeOnClick pauseOnHover/>
     </div>
   )
 }
