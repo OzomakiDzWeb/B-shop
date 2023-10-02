@@ -15,8 +15,8 @@ const App = () => {
   <div className="font-Poppins px-10 ">
     <BrowserRouter>
       <Header/>
-      
-         <Routes>
+       <div className="mt-[100px]">
+          <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/contact' element={<Contact/>}/>
           <Route path='/logIn' element={<LogIn/>}/>
@@ -25,7 +25,8 @@ const App = () => {
           <Route path='/order' element={<OrderHistory/>}/>
           <Route path='/cart' element={<Cart/>}/>
         </Routes>
-     
+       </div>
+      
       <Footer/>
      </BrowserRouter>
      <ToastContainer  autoClose={3000} closeOnClick pauseOnHover/>
