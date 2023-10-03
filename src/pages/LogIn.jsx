@@ -30,46 +30,51 @@ const contanerLg={
     transition:{duration:0.5}
   },
 }
-const LogIn = () => {
- const [email,setEmail]=useState('')
-  const [password,setpassword]=useState('')
-  const [Loding,setLoding]=useState(false)
 
-  const navigat=useNavigate()
+
+const LogIn = () => {
+  const [email,setEmail] = useState('')
+  const [password,setpassword] = useState('')
+  const [Loding,setLoding] = useState(false)
+
+  const navigat = useNavigate()
   const LogGoogle = ()=>{
     const provider=new GoogleAuthProvider()
-    setLoding(true)
-   signInWithPopup(auth, provider)
-    .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
-        setLoding(false)
-        toast.success(`Login Successful..`)
-           navigat('/')      
-   }).catch((error) => {
-        setLoding(false)
-        const errorCode = error.code;
-        const errorMessage = error.message;
-         toast.error(`${errorMessage} code errore is ${errorCode}`)
-    console.log(errorMessage)
-  })}
+        setLoding(true)
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                  const credential = GoogleAuthProvider.credentialFromResult(result);
+                  const token = credential.accessToken;
+                   const user = result.user;
+                   setLoding(false)
+                   toast.success(`Login Successful..`)
+                   navigat('/')      
+          }).catch((error) => {
+                   setLoding(false)
+                   const errorCode = error.code;
+                   const errorMessage = error.message;
+                   toast.error(`${errorMessage} code errore is ${errorCode}`)
+
+            })}
+
+
   const LogInaut = e =>{
-       e.preventDefault()
-       setLoding(true)
-      signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-     const user = userCredential.user.email.split('@')[0];
-     toast.success(`Login Successful...`)
-     setLoding(false)
-     navigat('/')
-  })
-  .catch((error) => {
-    toast.error(error.message)
-     setLoding(false)
-  });
+        e.preventDefault()
+        setLoding(true)
+        signInWithEmailAndPassword(auth, email, password)
+                 .then((userCredential) => {
+                       const user = userCredential.user.email.split('@')[0];
+                       toast.success(`Login Successful...`)
+                       setLoding(false)
+                       navigat('/')
+                      })
+                .catch((error) => {
+                       toast.error(error.message)
+                       setLoding(false)
+                       });
     
-  }
+                      }
+
   return (
     <div className='relative flex justify-center items-center h-[calc(100vh-80px)]  '>
       {Loding && <Lodding/>}
@@ -101,11 +106,23 @@ const LogIn = () => {
             required 
             value={password}
             onChange={e=>setpassword(e.target.value)}/>
-        <button className='btn bg-red3 mt-2'><Link to='/logIn'>Login</Link></button>
+        <button className='btn bg-red3 mt-2'>
+          <Link to='/logIn'>Login</Link>
+        </button>
         <Link className='hover:text-green2 transition-all duration-150' to='/reset'>Reset Password</Link>
         <div>--or--</div>
-        <button onClick={LogGoogle} className='btn bg-green1 flex justify-center items-center gap-1'><AiFillGoogleCircle size={25}/>Login whith Google</button>
-        <div className='mt-2'>Don t have account?<Link  className='hover:text-green2 transition-all duration-150 font-semibold'  to='/rigister'>Register</Link></div>
+        <button 
+           onClick={LogGoogle} 
+           className='btn bg-green1 flex justify-center items-center gap-1'>
+             <AiFillGoogleCircle size={25}/>
+                 Login whith Google
+        </button>
+        <div className='mt-2'>
+          Don t have account?
+          <Link  className='hover:text-green2 transition-all duration-150 font-semibold'  to='/rigister'>
+            Register
+          </Link>
+        </div>
         </motion.form>
         
     </div>

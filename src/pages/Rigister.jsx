@@ -2,10 +2,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import {motion} from 'framer-motion'
 import { toast } from 'react-toastify';
 import {createUserWithEmailAndPassword} from 'firebase/auth'
-import {auth} from '../fairbase/config'
+import {auth, db} from '../fairbase/config'
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import Lodding from '../component/Lodding'
+import {setDoc,doc} from 'firebase/firestore'
+
 const contanerImg={
   hidden:{
     x:'-100vw',
@@ -33,30 +35,37 @@ const Rigister = () => {
   const [password,setpassword]=useState('')
   const [conpasword,setconfPassword]=useState('')
   const [Loding,setLoding]=useState(false)
+
   const navigat=useNavigate()
+
   const registerUser = e =>{
-    e.preventDefault()
-    if(password!==conpasword){
-       toast.error('Passwords is defrent')
-    }else{
-      setLoding(true)
-      createUserWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-     const user = userCredential.user.email.split('@')[0];
-     toast.success(`Welcome ${user}`)
-     setLoding(false)
-     navigat('/logIn')
-  })
-  .catch((error) => {
-    toast.error(error.message)
-    setLoding(false)
-  });
-    }
-  }
+       e.preventDefault()
+        if(password!==conpasword){
+         toast.error('Passwords is defrent')
+       }else{
+          setLoding(true)
+             createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                         const user = userCredential.user.email.split('@')[0];
+                         toast.success(`Welcome ${user}`)
+                         setLoding(false)
+                         navigat('/logIn')
+                         console.log(userCredential)
+                          setDoc(doc(db, "users", user), {
+                            email:userCredential.user.email,
+                            useName:user,
+                            useID:userCredential.user.uid,
+                            cart:{}
+                             });
+                        })
+                    .catch((error) => {
+                         toast.error(error.message)
+                         setLoding(false)
+                          });
+                         }
+                         }
   return (
     <>
-    
- 
     <div className='relative flex justify-center items-center h-[calc(100vh-80px)]  '>
      {Loding && <Lodding/>}
       <motion.form
