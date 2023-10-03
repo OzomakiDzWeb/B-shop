@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import {addItmes,deletItme} from '../redux/CartSlice'
-import{rootReducer} from '../redux/Store'
 import {AiFillStar} from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductDetail from './ProductDetail'
+
+
+
 const CartItmes = ({product}) => {
    const [showDetails,setShowDetails]=useState(false)
 
      const dispatch=useDispatch()
      const cartProduct = useSelector((state) => state.cart.cartItmes)
-     const isProducexist=(id)=> {
+  const isProducexist=(id)=> {
        
   return cartProduct.some(obj => obj.id === id);
 }

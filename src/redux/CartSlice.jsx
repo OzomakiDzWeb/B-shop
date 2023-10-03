@@ -40,11 +40,19 @@ const CartSlice = createSlice({
        state.totalQuntity=state.totalQuntity-existItme.quantity
       }
        state.totalAmount = state.cartItmes.reduce((total,item) => total+Number(item.price) * Number(item.quantity),0)
+    },
+    decremant:(state,action)=>{
+      const newItmes = action.payload
+      const existItme=state.cartItmes.find(itm =>itm.id ===newItmes. id)
+      existItme.quantity--
+      existItme.totalPrice=newItmes.price * existItme.quantity
+      state.totalQuntity=state.totalQuntity- 1
+        state.totalAmount = state.cartItmes.reduce((total,item) => total+Number(item.price) * Number(item.quantity),0)
     }
   }
 });
 
 
-export const {addItmes,deletItme} = CartSlice.actions
+export const {addItmes,deletItme,decremant} = CartSlice.actions
 
 export default CartSlice.reducer
