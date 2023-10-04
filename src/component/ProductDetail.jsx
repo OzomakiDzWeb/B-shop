@@ -1,9 +1,9 @@
 import  ReactDOM  from "react-dom";
 import { AiFillStar,AiOutlineClose } from "react-icons/ai";
-const ProductDetail = ({product,setShowDetails,showDetails}) => {
+const ProductDetail = ({product,setShowDetails}) => {
   return ReactDOM.createPortal (
      <div className="fixed mt-5 top-0 z-[60]  left-0 w-full h-full bg-gray-lghit/80 flex items-center justify-center">
-       <div className="grid grid-cols-1 sm:grid-cols-2 place-content-center  relative  bg-[#fff] mx-10 p-5">
+       <div className="grid grid-cols-1 sm:grid-cols-2 place-content-center   relative  bg-[#fff] mx-10 p-5">
          <div className="">
            <img  src={product.imgUrl}/>
          </div>

@@ -3,7 +3,21 @@ import {addItmes,deletItme} from '../redux/CartSlice'
 import {AiFillStar} from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import ProductDetail from './ProductDetail'
-
+import { motion, AnimatePresence } from 'framer-motion';
+ const cardVariants={
+  offscreen: {
+    scale: 0
+  },
+  onscreen: {
+    scale: 1,
+    
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 0.1
+    }
+  }
+};
 
 
 const CartItmes = ({product}) => {
@@ -20,7 +34,14 @@ const choosAction=(cas)=>{
 }
 console.log(isProducexist(2))
        return (
-    <div className='p-3 m-2 bg-gray-extrai/50 shadow-lg rounded-md min-w-[260px] cursor-pointer hover:scale-105 transition-all duration-150'>
+    <motion.div
+          key={product.id}
+          variants={cardVariants}
+            initial="offscreen"
+      whileInView="onscreen"
+      viewport={{ once: true, amount: 0.8 }}
+          
+          transition={{ duration: 0.5,damping:3 }} className='p-3 m-2 bg-gray-extrai/50 shadow-lg rounded-md min-w-[260px] cursor-pointer hover:scale-105 transition-all duration-150'>
       {showDetails && <ProductDetail product={product} setShowDetails={setShowDetails} showDetails={showDetails}/>}
       <img src={product.imgUrl} alt=''/>
       <h1 className='font-bold'>{product.productName}</h1>
@@ -34,10 +55,9 @@ console.log(isProducexist(2))
             <span>Price:</span>
             <span className='font-bold'>{product.price}<span className="text-green1">$</span></span>
          </div>
-     
       <button  onClick={()=>{isProducexist(product.id)?dispatch(deletItme(product.id)):dispatch(addItmes(product))}} className={`${isProducexist(product.id)?'bg-red2':'bg-green3'} text-[#000] my-1 font-bold disabled:bg-green3/20 btn`}>{isProducexist(product.id)?"remove to Cart":'Add to Card'}</button>
       <button onClick={()=>setShowDetails(!showDetails)} className='btn bg-green2 text-[#000] my-1 font-bold'>Details</button>
-     </div>
+     </motion.div>
   )
 }
 

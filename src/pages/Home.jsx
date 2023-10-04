@@ -3,7 +3,8 @@ import {db} from '../fairbase/config'
 import product from '../Data/data/products'
 import CartItmes from "../component/CartItmes";
 import { useState } from "react";
-
+import Slider from "../component/Slider";
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Home = () => {
 
@@ -19,7 +20,7 @@ const Home = () => {
 
     setSearchResults(filteredArray);
   };
- 
+
   const addToCart=()=>{
     const washingtonRef = doc(db, "users", "2eee");
  updateDoc(washingtonRef, {
@@ -35,6 +36,7 @@ const Home = () => {
   };
   return (
     <div className="">
+      <Slider/>
       <div className="flex justify-between">
         <label>
           sort bay
@@ -51,7 +53,12 @@ const Home = () => {
         onChange={handleSearch}/>
       </div>
      <div className="mt-10 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-content-center gap-2">
-       {searchResults.map(product=><CartItmes key={product.id} product={product}/>)} 
+       {searchResults.map(product=>
+          <div
+          key={product.id}
+          >
+            <CartItmes  product={product}/>
+          </div>)} 
      </div>
     </div>
   )
