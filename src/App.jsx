@@ -12,10 +12,10 @@ import { ToastContainer } from "react-toastify"
 
 const App = () => {
   return (
-  <div className="font-Poppins px-10 ">
+  <div className="font-Poppins  ">
     <BrowserRouter>
       <Header/>
-       <div className="mt-[100px]">
+       <div className="mt-[100px] px-10">
           <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/contact' element={<Contact/>}/>
