@@ -1,13 +1,13 @@
-import { doc, updateDoc } from "firebase/firestore";
-import {db} from '../fairbase/config'
 import product from '../Data/data/products'
 import CartItmes from "../component/CartItmes";
 import { useState } from "react";
 import Slider from "../component/Slider";
-import { motion, AnimatePresence } from 'framer-motion';
+import { useSelector } from "react-redux";
 
 const Home = () => {
-
+  // const select = useSelector(state=>state.auth.isLoggedIn)
+  // const userName = useSelector(state=>state.auth.useName)
+  // const cartuser = useSelector(state=>state.cart.cartItmes)
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState(product);
@@ -21,26 +21,23 @@ const Home = () => {
     setSearchResults(filteredArray);
   };
 
-  const addToCart=()=>{
-    const washingtonRef = doc(db, "users", "2eee");
- updateDoc(washingtonRef, {
-    "useName": 13,
-   
-});
-  }
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
     setSearchResults(event.target.value === 'All'
     ? product
     : product.filter(item => item.category === event.target.value))
   };
+
+
   return (
     <div className="">
       <Slider/>
       <div className="flex justify-between">
         <label>
-          sort bay
-          <select value={selectedCategory} onChange={handleCategoryChange}>
+          sort by
+          <select className="rounded ml-3 text-[#000] dark:text-[#fff] dark:bg-gray-darck" 
+                value={selectedCategory} 
+                onChange={handleCategoryChange}>
           <option value='All'>All</option>
           <option value='sofa'>sofa</option>
           <option value='chair'>chair</option>
@@ -52,9 +49,9 @@ const Home = () => {
        <input placeholder="Search product" className="inpt w-1/2" type="text" value={searchTerm}
         onChange={handleSearch}/>
       </div>
-     <div className="mt-10 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-content-center gap-2">
+     <div className="mt-10 grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 place-content-center gap-3 gap-x-10 ">
        {searchResults.map(product=>
-          <div
+          <div className=''
           key={product.id}
           >
             <CartItmes  product={product}/>

@@ -12,12 +12,9 @@ import { useNavigate } from "react-router";
   const cartProduct = useSelector((state) => state.cart.cartItmes)
   const totalAmount = useSelector((state) => state.cart.totalAmount)
    const dispatch=useDispatch()
-   const isProducexist=(id)=> {
-       
-  return cartProduct.some(obj => obj.id === id);
-}
+
   return (
-    <div>
+    <div className="min-h-[100vh] flex items-center flex-col justify-around">
       <h1 className="font-extrabold text-[30px] text-center my-10">Cart Shooping </h1>
       <div className="sm:grid grid-cols-2 gap-5 flex flex-col items-center ">
         {cartProduct.length>=1
@@ -39,7 +36,7 @@ import { useNavigate } from "react-router";
                 <img className="  min-w-[80px] max-w-[150px]" src={product.image} alt='dd'/>
                 <div className="h-2/5">
                    <div className="flex  gap-1">
-                      <button className="btn bg-red3 py-0" onClick={()=>dispatch(decremant(product))}>-1</button>
+                      <button className="btn bg-red3 py-0 disabled:bg-gray-darck" onClick={()=>dispatch(decremant(product))} disabled={product.quantity<=1}>-1</button>
                       <button  className="btn bg-green2 py-0" onClick={()=>dispatch(addItmes(product))}>+1</button>
                     </div>
                   <button  onClick={()=>dispatch(deletItme(product.id))} className=' py-0 bg-red2 text-[#000] my-1 font-bold disabled:bg-green3/20 btn'>Delet</button>

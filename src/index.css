@@ -16,7 +16,7 @@ html {
     @apply relative text-green2 scale-105 w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-red1 after:w-full  after:scale-x-100 after:transition-all after:duration-300  after:origin-left;
   }
   .inpt {
-  @apply   border border-gray-lghit outline-none w-full px-2 py-1 rounded-md
+  @apply text-[#000] dark:text-[#fff] dark:bg-gray-darck  border border-gray-lghit outline-none w-full px-2 py-1 rounded-md
   }
   .btn{
     @apply text-gray-extrai w-full rounded-md px-2 py-1 hover:scale-105 transition-all duration-150

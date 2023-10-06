@@ -1,10 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux';
 
 const initialState = {
  isLoggedIn:false,
  email:null,
  useName:null,
- useID:null
+ useID:null,
+ cartItmes:[],
+ totalAmount:0,
+totalQuntity:0,
 }
 
 const authSlicse = createSlice({
@@ -17,6 +21,7 @@ const authSlicse = createSlice({
           state.email=email
           state.useName=useName
           state.useID=useID
+         
      },
        REMOVE_ACTIV_USER:(state,action)=>{
           state.isLoggedIn=false

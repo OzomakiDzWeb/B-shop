@@ -23,15 +23,15 @@ const Slider = () => {
       prevIndex === 0 ? products.length - 1 : prevIndex - 1
     );
   };
-console.log(products)
+
   return (
-    <div className="flex items-center justify-between h-screen  ">
+    <div className="flex  items-center justify-between h-screen  ">
       <button onClick={prevImage}><AiFillLeftCircle className='text-green1' size={40}/></button>
       
      <AnimatePresence initial={false}>
-       <div className='flex flex-row justify-center gap-5 items-center'>
+       <div className='flex flex-col md:flex-row justify-center  px-5 gap-5 items-center'>
            <motion.img
-           className='w-1/2 p-4 rounded-lg'
+           className='md:w-1/2  rounded-lg'
           key={currentImageIndex}
           initial={{ opacity: 0,scale:0}}
           animate={{ opacity: 1,scale:1 }}
@@ -45,7 +45,7 @@ console.log(products)
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}>
-          <h1 className='font-bold text-bold mb-3'>{products[currentImageIndex].productName}</h1>
+          <h1 className='font-bold text-bold text-center md:text-left mb-3'>{products[currentImageIndex].productName}</h1>
           <p className='mb-5'>{products[currentImageIndex].shortDesc}</p>
           <div className='flex justify-center gap-5'>
           <p className='font-bold'>Price</p>

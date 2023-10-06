@@ -4,9 +4,10 @@ import { toast } from 'react-toastify';
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {auth, db} from '../fairbase/config'
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Lodding from '../component/Lodding'
-import {setDoc,doc} from 'firebase/firestore'
+import {setDoc,doc, updateDoc, collection, addDoc,} from 'firebase/firestore'
+import { useSelector } from 'react-redux';
 
 const contanerImg={
   hidden:{
@@ -31,11 +32,19 @@ const contanerLg={
   },
 }
 const Rigister = () => {
+ const AddCollectionUser=async(name,email,cart,dat)=>{
+                      const cityRef = doc(db, 'users', name);
+                      setDoc(cityRef,{name:name,email:email,cart:cart,datRegister:dat}, { merge: true });
+                        
+                      }  
   const [email,setEmail]=useState('')
   const [password,setpassword]=useState('')
   const [conpasword,setconfPassword]=useState('')
   const [Loding,setLoding]=useState(false)
-
+ const nemberProduct=useSelector((state) => state.cart.cartItmes)
+ const cartUser=useSelector((state) => state.cart)
+ 
+  console.log(nemberProduct)
   const navigat=useNavigate()
 
   const registerUser = e =>{
@@ -49,14 +58,8 @@ const Rigister = () => {
                          const user = userCredential.user.email.split('@')[0];
                          toast.success(`Welcome ${user}`)
                          setLoding(false)
-                         navigat('/logIn')
-                         console.log(userCredential)
-                          setDoc(doc(db, "users", user), {
-                            email:userCredential.user.email,
-                            useName:user,
-                            useID:userCredential.user.uid,
-                            cart:{}
-                             });
+                         navigat('/')
+                               AddCollectionUser(user,email,cartUser,new Date())
                         })
                     .catch((error) => {
                          toast.error(error.message)
@@ -64,9 +67,11 @@ const Rigister = () => {
                           });
                          }
                          }
+                                      
   return (
     <>
-    <div className='relative flex justify-center items-center h-[calc(100vh-80px)]  '>
+  
+    <div className='relative flex justify-center items-center h-[calc(100vh-80px)] gap-5  '>
      {Loding && <Lodding/>}
       <motion.form
         variants={contanerImg}

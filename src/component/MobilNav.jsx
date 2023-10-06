@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom"
 import {motion} from 'framer-motion'
 
 // eslint-disable-next-line react/prop-types
-const MobilNav = ({show,setshow,LogOut,conct}) => {
+const MobilNav = ({show,setshow,LogOut,conct,darkMode,toggleDarkMode}) => {
      const containerVariant={
   hidden:{
     opacity:0,
@@ -25,9 +25,8 @@ const MobilNav = ({show,setshow,LogOut,conct}) => {
       initial="hidden"
       animate="visible"
       exit="exit"
-     className={`${show?'flex':'hidden'} h-screen w-full fixed top-0 right-0 z-20 justify-end items-center  bg-gray-darck/50 `}>
-      <div className="absolute w-full h-full top-0 left-0 "></div>
-      <div className="bg-gray-extrai h-full flex p-5 z-10 left-0">
+     className={`${show?'flex':'hidden'}  h-screen w-full fixed top-0 right-0 z-20 justify-end items-center  bg-gray-darck/50 `}>
+      <div className="bg-gray-extrai dark:bg-gray-darck h-full flex p-5 z-10 left-0">
          <div className="flex flex-col justify-center items-center gap-4">
         {conct === ''
            ?(<NavLink className={activLik} to='/logIn'>Login</NavLink>)
@@ -46,6 +45,10 @@ const MobilNav = ({show,setshow,LogOut,conct}) => {
               LogOut
         </NavLink>
            <Link onClick={() => setshow(!show)} to='/cart'>
+          <button 
+             onClick={toggleDarkMode}>
+               <img src={`/src/assets/${darkMode?'icon-sun.svg':'icon-moon.svg'}`}/>
+          </button>
           <div className="relative">
             <AiOutlineShopping className="h-8 hover:text-red1 transition-all duration-300 w-8 sm:h-10 sm:w-10 cursor-pointer"/>
             <span className="absolute z-10 bg-red3 p-1 w-4 h-4 rounded-full flex items-center justify-center top-0 right-0">0</span>

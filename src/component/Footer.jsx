@@ -7,15 +7,14 @@ const Footer = () => {
   const dat=new Date()
 
   return (
-    <div className="py-5 px-3  bg-gray-extrai  rounded-lg shadow-lg mt-5 divide-y-2">
+    <div className="py-5 px-3  bg-gray-extrai dark:text-[#fff] dark:bg-gray-darck  rounded-lg shadow-lg mt-5 divide-y-2">
       <div className="flex flex-col justify-around sm:flex-row mb-3">
         <div className="flex flex-col ">
 
           <h1 className="font-bold mb-4 ">Linkes</h1>
-          <Link>Home</Link>
-          <Link>Countact</Link>
-          <Link>Login</Link>
-          <Link>My Order</Link>
+          <Link to='/'>Home</Link>
+          <Link to='/contact'>Countact</Link>
+          <Link to='/logIn'>Login</Link>
           </div>
           <div className="flex flex-col ">
             <h1 className="font-bold mb-4 mt-4 sm:mt-0">Contact me</h1>
